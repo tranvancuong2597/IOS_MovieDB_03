@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  FeedbackViewController.swift
 //  Movie
 //
-//  Created by TranCuong on 7/31/18.
+//  Created by Da on 7/31/18.
 //  Copyright © 2018 Tran Cuong. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class FeedbackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
