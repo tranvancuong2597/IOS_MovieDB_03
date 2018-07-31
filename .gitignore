@@ -49,6 +49,8 @@ playground.xcworkspace
 #
 # Pods/
 */Pods
+#key
+/Movie/Movie/Utils/APIKey.swift
 
 # Carthage
 #
