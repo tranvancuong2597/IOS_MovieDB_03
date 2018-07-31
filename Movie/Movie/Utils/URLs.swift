@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct URLs {
     private static var APIBaseUrl = "https://api.themoviedb.org/3"
     public static let APIGetGenresUrl = APIBaseUrl + "/genre/movie/list"
