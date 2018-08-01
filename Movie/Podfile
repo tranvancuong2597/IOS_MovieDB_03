@@ -4,4 +4,7 @@ target 'Movie' do
   use_frameworks!
   pod 'Alamofire'
   pod 'ObjectMapper'
+  pod 'SDWebImage'
+  pod 'Reusable'
+  pod 'Cosmos'
 end

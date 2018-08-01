@@ -1,5 +1,5 @@
 //
-//  GetGenresRequest.swift
+//  GetMoviesList.swift
 //  Movie
 //
 //  Created by Da on 7/31/18.
@@ -10,12 +10,13 @@ import Foundation
 import ObjectMapper
 import Alamofire
 
-class GetGenresRequest: BaseRequest {
-    required init() {
+class GetMoviesListRequest: BaseRequest {
+    required init(id: Int) {
         let body: [String: Any]  = [
             "api_key": APIKey.key,
             "language": "en-US"
         ]
-        super.init(url: URLs.APIGetGenres, requestType: .get, body: body)
+        let url = URLs.APIGetMoviesList + "\(id)" + "/movies"
+        super.init(url: url, requestType: .get, body: body)
     }
 }

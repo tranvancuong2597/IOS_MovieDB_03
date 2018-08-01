@@ -25,12 +25,9 @@ struct APIService {
     }
     
     func request<T: Mappable>(input: BaseRequest, completion: @escaping (_ value: T?,_ error: BaseError? ) -> Void ) {
-        
         alamofireManager.request(input.url, method: input.requestType, parameters: input.body, encoding: input.encoding)
             .validate(statusCode: 200..<500)
             .responseJSON { response in
-                print(response.request?.url ?? "Error")
-                print(response)
                 switch response.result {
                 case .success(let value):
                     if let statusCode = response.response?.statusCode {

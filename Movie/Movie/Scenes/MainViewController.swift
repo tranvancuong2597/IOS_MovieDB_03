@@ -32,6 +32,7 @@ class MainViewController: UITabBarController {
                                 libraryViewController,
                                 searchViewController,
                                 feedbackViewController]
+        self.tabBar.tintColor = UIColor(red: 238/255, green: 130/255, blue: 238/255, alpha: 1)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
