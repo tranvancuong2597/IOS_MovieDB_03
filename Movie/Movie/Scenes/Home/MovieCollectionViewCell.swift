@@ -26,7 +26,7 @@ class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
     func updateCell(movie: Movie?) {
         self.titleLabel.text = movie?.title
         guard let poster = movie?.posterPath else { return }
-        let url = URL(string: URLs.posterImage + poster)
+        let url = URL(string: URLs.Poster_image + poster)
         self.posterImageView.sd_setImage(with: url, completed: nil)
     }
 }
