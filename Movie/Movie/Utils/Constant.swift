@@ -29,4 +29,10 @@ struct Storyboard_id {
 struct cellConstaintSize {
     static let spaceCollectionCell = CGFloat(8)
     static let heightTableCell = CGFloat(30)
+    static let spaceItem = CGFloat(0)
+    static let spaceLine = CGFloat(0)
+}
+
+struct IdentifierScreen {
+    static let loadMore = "LoadMoreViewController"
 }

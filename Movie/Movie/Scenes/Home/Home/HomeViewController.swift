@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     // MARK: VARIABLES
     var genres = [Genre]()
-    var moviesList = [String : [Movie]]()
+    var moviesDic = [String : [Movie]]()
     private let homeRepository: HomeRepository = HomeRepositoryImpl(api: APIService.share)
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
                         case .success(let moviesListRespone):
                             guard let id = moviesListRespone?.id else { return }
                             guard let movies = moviesListRespone?.movies else { return }
-                            self.moviesList[String(id)] = movies
+                            self.moviesDic[String(id)] = movies
                             self.tableView.reloadData()
                         case .failure( _):
                             print("ERROR MOVIESLIST")
@@ -67,8 +67,20 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let idStr = String(id)
-        let movies = moviesList[idStr]
+        let movies = moviesDic[idStr]
         cell.updateCell(name: name, movies: movies)
+        cell.delegate = self
         return cell
+    }
+}
+
+extension HomeViewController: GenreTableViewDelegate {
+    func loadmoreAction(movies: [Movie]) {
+        let storyboad = UIStoryboard(name: Storyboard.home, bundle: nil)
+        guard let vc = storyboad.instantiateViewController(withIdentifier: IdentifierScreen.loadMore) as? LoadMoreViewController else {
+            return
+        }
+        vc.reloadData(movies: movies)
+        self.present(vc, animated: true, completion: nil)
     }
 }

@@ -16,7 +16,7 @@ class GetMoviesListRequest: BaseRequest {
             "api_key": APIKey.key,
             "language": "en-US"
         ]
-        let url = URLs.APIGetMoviesList + "\(id)" + "/movies"
+        let url = URLs.apiGetMovies + "\(id)" + "/movies"
         super.init(url: url, requestType: .get, body: body)
     }
 }
