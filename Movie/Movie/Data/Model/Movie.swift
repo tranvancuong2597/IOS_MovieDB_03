@@ -3,7 +3,8 @@ import ObjectMapper
 
 class Movie: BaseModel {
     var id: Int?
-    var original_title: String?
+    var title: String?
+    var posterPath: String?
     
     required init?(map: Map) {
         mapping(map: map)
@@ -11,6 +12,7 @@ class Movie: BaseModel {
     
     func mapping(map: Map) {
         id <- map["id"]
-        original_title <- map["original_title"]
+        title <- map["original_title"]
+        posterPath <- map["poster_path"]
     }
 }

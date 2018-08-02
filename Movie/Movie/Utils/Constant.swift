@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Storyboard {
     static let main = "Main"
@@ -23,4 +24,9 @@ struct Storyboard_id {
     static let library = "LibraryVC"
     static let search = "SearchVC"
     static let feedback = "FeedbackVC"
+}
+
+struct cellConstaintSize {
+    static let spaceCollectionCell = CGFloat(8)
+    static let heightTableCell = CGFloat(30)
 }
