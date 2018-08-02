@@ -10,11 +10,25 @@
 import Foundation
 import ObjectMapper
 
+
+typealias completionMovies = (BaseResult<MoviesListResponse>) -> Void
+typealias completionTopMovies = (BaseResult<MoviesTopListResponse>) -> Void
+typealias completionPopularMovies = (BaseResult<MoviesPopularListResponse>) -> Void
+typealias completionUpcomingMovies = (BaseResult<MoviesUpcomingListResponse>) -> Void
+
 protocol MovieRepository {
-    func getMoviesList(id: Int, completion: @escaping (BaseResult<MoviesListResponse>) -> Void)
+    func getMoviesList(id: Int, completion: @escaping completionMovies)
+    
+    func getTopMoviesList(completion: @escaping completionTopMovies)
+    
+    func getPopularMoviesList(completion: @escaping completionPopularMovies)
+    
+    func getUpcomingMoviesList(completion: @escaping completionUpcomingMovies)
+    
 }
 
 class MovieRepositoryImpl: MovieRepository {
+    
     private var api: APIService?
     required init(api: APIService) {
         self.api = api
@@ -22,9 +36,50 @@ class MovieRepositoryImpl: MovieRepository {
     
     static let sharedInstance: MovieRepository = MovieRepositoryImpl(api: APIService.share)
     
-    func getMoviesList(id: Int, completion: @escaping (BaseResult<MoviesListResponse>) -> Void) {
+
+    
+    func getMoviesList(id: Int, completion: @escaping completionMovies) {
         let input = GetMoviesListRequest(id: id)
         api?.request(input: input) { (object: MoviesListResponse?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+    
+    func getTopMoviesList(completion: @escaping completionTopMovies) {
+        let input = GetMoviesTopListRequest()
+        api?.request(input: input) { (object: MoviesTopListResponse?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+    
+    func getPopularMoviesList(completion: @escaping completionPopularMovies) {
+        let input = GetMoviesPopularListRequest()
+        api?.request(input: input) { (object: MoviesPopularListResponse?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+    
+    func getUpcomingMoviesList(completion: @escaping completionUpcomingMovies) {
+        let input = GetMoviesUpcomingListRequest()
+        api?.request(input: input) { (object: MoviesUpcomingListResponse?, error) in
             if let object = object {
                 completion(.success(object))
             } else if let error = error {
