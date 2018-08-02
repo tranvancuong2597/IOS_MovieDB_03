@@ -9,7 +9,7 @@ import Foundation
 import ObjectMapper
 
 class Genre: BaseModel {
-    var id: Int?
+    var id = 0
     var name: String?
     
     required init?(map: Map) {

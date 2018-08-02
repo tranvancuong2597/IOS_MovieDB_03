@@ -35,4 +35,5 @@ struct cellConstaintSize {
 
 struct IdentifierScreen {
     static let loadMore = "LoadMoreViewController"
+    static let movieDetail = "MovieDetailViewController"
 }

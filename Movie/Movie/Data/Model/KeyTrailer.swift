@@ -1,23 +1,24 @@
 //
-//  GenreResponse.swift
+//  Id.swift
 //  Movie
 //
-//  Created by Da on 7/31/18.
+//  Created by Da on 8/3/18.
 //  Copyright © 2018 Tran Cuong. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class GenreResponse : Mappable {
+class KeyTrailer: BaseModel {
+    var id = 0
+    var key = ""
     
-    var genres: [Genre]?
-    
-    required init(map: Map) {
+    required init?(map: Map) {
         mapping(map: map)
     }
     
     func mapping(map: Map) {
-        genres <- map["genres"]
+        id <- map["id"]
+        key <- map["key"]
     }
 }
