@@ -9,13 +9,20 @@
 import UIKit
 import Reusable
 
+protocol GenreTableViewDelegate: class {
+    func loadmoreAction(movies: [Movie])
+}
+
 class GenreTableViewCell: UITableViewCell, NibReusable {
     
     // MARK: OUTLET
     @IBOutlet private weak var name_Genre_Label: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var loadMoreButton: UIButton!
+    
     // MARK: VARIABLES
     var movies = [Movie]()
+    weak var delegate: GenreTableViewDelegate?
     private let moviesListRepository: MovieRepository = MovieRepositoryImpl(api: APIService.share)
     
     func updateCell(name: String, movies: [Movie]?) {
@@ -30,6 +37,10 @@ class GenreTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
+    }
+    
+    @IBAction func loadmoreActionButton(_ sender: Any) {
+        delegate?.loadmoreAction(movies: movies)
     }
     
     func setup() {

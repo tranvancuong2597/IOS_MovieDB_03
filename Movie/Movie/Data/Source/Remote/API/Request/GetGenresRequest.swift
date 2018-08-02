@@ -16,6 +16,6 @@ class GetGenresRequest: BaseRequest {
             "api_key": APIKey.key,
             "language": "en-US"
         ]
-        super.init(url: URLs.APIGetGenres, requestType: .get, body: body)
+        super.init(url: URLs.apiGetGenres, requestType: .get, body: body)
     }
 }

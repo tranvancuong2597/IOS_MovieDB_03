@@ -36,6 +36,9 @@
                         <state key="normal" title="Load more">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="loadmoreActionButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3MC-Wi-rfw"/>
+                        </connections>
                     </button>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Q7G-CZ-o1i">
                         <rect key="frame" x="8" y="46" width="304" height="258.5"/>
@@ -68,6 +71,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="collectionView" destination="Q7G-CZ-o1i" id="Vdj-VO-0Id"/>
+                <outlet property="loadMoreButton" destination="pgn-J7-0NY" id="epR-ww-axh"/>
                 <outlet property="name_Genre_Label" destination="aTQ-a7-fCe" id="T8i-06-bt1"/>
             </connections>
             <point key="canvasLocation" x="94" y="130.5"/>
