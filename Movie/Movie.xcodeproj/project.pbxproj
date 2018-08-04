@@ -58,6 +58,8 @@
 		529F94432111AF1A00D856CA /* MoviesPopularListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529F94422111AF1A00D856CA /* MoviesPopularListResponse.swift */; };
 		529F94452111AF6B00D856CA /* GetMoviesPopularListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529F94442111AF6B00D856CA /* GetMoviesPopularListRequest.swift */; };
 		52A152122113DC3400860AF3 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A152112113DC3400860AF3 /* MovieCollectionViewCell.xib */; };
+		52C459932115547600193958 /* SearchMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C459922115547600193958 /* SearchMoviesResponse.swift */; };
+		52C45995211554C600193958 /* GetSearchListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C45994211554C600193958 /* GetSearchListRequest.swift */; };
 		9353C73D0ECDE29EC085A869 /* Pods_Movie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB11369E593DA247E5E63BA5 /* Pods_Movie.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +119,8 @@
 		529F94422111AF1A00D856CA /* MoviesPopularListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPopularListResponse.swift; sourceTree = "<group>"; };
 		529F94442111AF6B00D856CA /* GetMoviesPopularListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoviesPopularListRequest.swift; sourceTree = "<group>"; };
 		52A152112113DC3400860AF3 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MovieCollectionViewCell.xib; path = ../../../../../../../../Desktop/Movie/Movie/Scenes/Home/MovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		52C459922115547600193958 /* SearchMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesResponse.swift; sourceTree = "<group>"; };
+		52C45994211554C600193958 /* GetSearchListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchListRequest.swift; sourceTree = "<group>"; };
 		EB11369E593DA247E5E63BA5 /* Pods_Movie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -271,6 +275,7 @@
 				039FC7DC21100FB00036BC6A /* BaseRequest.swift */,
 				039FC7DE21100FCB0036BC6A /* GetGenresRequest.swift */,
 				038940D02110B62400F7EDDB /* GetMoviesListRequest.swift */,
+				52C45994211554C600193958 /* GetSearchListRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 				529F943E2111930C00D856CA /* MoviesTopListResponse.swift */,
 				529F94422111AF1A00D856CA /* MoviesPopularListResponse.swift */,
 				5299AF7021129C4F00B4EF59 /* MoviesUpcomingListResponse.swift */,
+				52C459922115547600193958 /* SearchMoviesResponse.swift */,
 			);
 			path = Respone;
 			sourceTree = "<group>";
@@ -586,6 +592,7 @@
 				03B380A521129F4D006B7D62 /* LoadMoreViewController.swift in Sources */,
 				039FC7D921100F8F0036BC6A /* BaseResult.swift in Sources */,
 				039FC7FD211044BC0036BC6A /* MainViewController.swift in Sources */,
+				52C45995211554C600193958 /* GetSearchListRequest.swift in Sources */,
 				03B380A82112EAEE006B7D62 /* MovieDetailViewController.swift in Sources */,
 				529F9441211193A300D856CA /* GetMoviesTopListRequest.swift in Sources */,
 				039FC7E3211010030036BC6A /* GenreResponse.swift in Sources */,
@@ -593,6 +600,7 @@
 				038940CC2110A9BC00F7EDDB /* MovieCollectionViewCell.swift in Sources */,
 				5299AF7121129C4F00B4EF59 /* MoviesUpcomingListResponse.swift in Sources */,
 				039FC7E52110101A0036BC6A /* URLs.swift in Sources */,
+				52C459932115547600193958 /* SearchMoviesResponse.swift in Sources */,
 				039FC7D521100F680036BC6A /* BaseError.swift in Sources */,
 				5299AF7321129C9800B4EF59 /* GetMoviesUpcomingListRequest.swift in Sources */,
 				529F94432111AF1A00D856CA /* MoviesPopularListResponse.swift in Sources */,

@@ -10,11 +10,12 @@
 import Foundation
 import ObjectMapper
 
-
 typealias completionMovies = (BaseResult<MoviesListResponse>) -> Void
 typealias completionTopMovies = (BaseResult<MoviesTopListResponse>) -> Void
 typealias completionPopularMovies = (BaseResult<MoviesPopularListResponse>) -> Void
 typealias completionUpcomingMovies = (BaseResult<MoviesUpcomingListResponse>) -> Void
+typealias completionSearchMovies = (BaseResult<SearchMoviesResponse>) -> Void
+
 
 protocol MovieRepository {
     func getMoviesList(id: Int, completion: @escaping completionMovies)
@@ -25,18 +26,17 @@ protocol MovieRepository {
     
     func getUpcomingMoviesList(completion: @escaping completionUpcomingMovies)
     
+    func getSearchMoviesList(query: String, page: Int,completion: @escaping completionSearchMovies)
 }
 
 class MovieRepositoryImpl: MovieRepository {
-    
+   
     private var api: APIService?
     required init(api: APIService) {
         self.api = api
     }
     
     static let sharedInstance: MovieRepository = MovieRepositoryImpl(api: APIService.share)
-    
-
     
     func getMoviesList(id: Int, completion: @escaping completionMovies) {
         let input = GetMoviesListRequest(id: id)
@@ -89,4 +89,19 @@ class MovieRepositoryImpl: MovieRepository {
             }
         }
     }
+    
+    func getSearchMoviesList(query: String, page: Int, completion: @escaping completionSearchMovies) {
+        let input = GetSearchListRequest(query: query, page: page)
+        api?.request(input: input) { (object: SearchMoviesResponse?, error) in
+            if let object = object {
+                print("cccccccc")
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+
 }

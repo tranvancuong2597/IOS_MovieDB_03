@@ -72,24 +72,17 @@ class TopFilmViewController: UIViewController {
     }
     
     func loadDataTopRate() {
-        movieRepository.getTopMoviesList(completion: { [weak self] resultTopRateList in
+        self.movieRepository.getTopMoviesList(completion: { [weak self] (resultList) in
             guard let `self` = self else { return }
-            switch resultTopRateList {
-            case .success( _):
-                self.movieRepository.getTopMoviesList(completion: { (resultList) in
-                    switch resultList {
-                    case .success(let moviesTopListResponse):
-                        guard let movies = moviesTopListResponse?.movies else { return }
-                        self.topRateFilm = movies
-                        print(self.topRateFilm.count)
-                         self.arrFilm.append(self.topRateFilm)
-                        DispatchQueue.main.async {
-                             self.topFilmTableView.reloadData()
-                        }
-                    case .failure( _):
-                        print("Error")
-                    }
-                })
+            switch resultList {
+            case .success(let moviesTopListResponse):
+                guard let movies = moviesTopListResponse?.movies else { return }
+                self.topRateFilm = movies
+                print(self.topRateFilm.count)
+                self.arrFilm.append(self.topRateFilm)
+                DispatchQueue.main.async {
+                    self.topFilmTableView.reloadData()
+                }
             case .failure( _):
                 print("Error")
             }
@@ -97,23 +90,16 @@ class TopFilmViewController: UIViewController {
     }
     
     func loadDataPopular() {
-        movieRepository.getPopularMoviesList(completion: { [weak self] (resultPopularList) in
+        self.movieRepository.getPopularMoviesList(completion: { [weak self] (resultList) in
             guard let `self` = self else { return }
-            switch resultPopularList {
-            case .success( _):
-                self.movieRepository.getPopularMoviesList(completion: { (resultList) in
-                    switch resultList {
-                    case .success(let moviesPopularListResponse):
-                        guard let movies = moviesPopularListResponse?.movies else { return }
-                        self.popularFilm = movies
-                         self.arrFilm.append(self.popularFilm)
-                        DispatchQueue.main.async {
-                            self.topFilmTableView.reloadData()
-                        }
-                    case .failure( _):
-                        print("Error")
-                    }
-                })
+            switch resultList {
+            case .success(let moviesPopularListResponse):
+                guard let movies = moviesPopularListResponse?.movies else { return }
+                self.popularFilm = movies
+                self.arrFilm.append(self.popularFilm)
+                DispatchQueue.main.async {
+                    self.topFilmTableView.reloadData()
+                }
             case .failure( _):
                 print("Error")
             }
@@ -121,23 +107,16 @@ class TopFilmViewController: UIViewController {
     }
     
     func loadDataUpcoming() {
-        movieRepository.getUpcomingMoviesList(completion: { [weak self] (resultUpcomingList) in
+        self.movieRepository.getUpcomingMoviesList(completion: { [weak self] (resultList) in
             guard let `self` = self else { return }
-            switch resultUpcomingList {
-            case .success( _):
-                self.movieRepository.getUpcomingMoviesList(completion: { (resultList) in
-                    switch resultList {
-                    case .success(let moviesUpcomingListResponse):
-                        guard let movies = moviesUpcomingListResponse?.movies else { return }
-                        self.upcommingFilm = movies
-                        self.arrFilm.append(self.upcommingFilm)
-                        DispatchQueue.main.async {
-                            self.topFilmTableView.reloadData()
-                        }
-                    case .failure( _):
-                        print("Error")
-                    }
-                })
+            switch resultList {
+            case .success(let moviesUpcomingListResponse):
+                guard let movies = moviesUpcomingListResponse?.movies else { return }
+                self.upcommingFilm = movies
+                self.arrFilm.append(self.upcommingFilm)
+                DispatchQueue.main.async {
+                    self.topFilmTableView.reloadData()
+                }
             case .failure( _):
                 print("Error")
             }

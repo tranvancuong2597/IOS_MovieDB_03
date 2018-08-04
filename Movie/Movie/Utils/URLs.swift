@@ -19,6 +19,8 @@ struct URLs {
     
     public static let apiGetMoviesByGenres = apiBaseUrl + "/list/"
     
+    static let apiMovieSearch = apiBaseUrl + "/search/movie?"
+    
     static let apiMovieTopRatedURL = apiBaseUrl + "/movie/top_rated"
     
     static let apiMoviePopularURL = apiBaseUrl + "/movie/popular"
