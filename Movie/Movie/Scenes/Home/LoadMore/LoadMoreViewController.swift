@@ -25,7 +25,7 @@ class LoadMoreViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionView.reloadData()
@@ -57,7 +57,7 @@ extension LoadMoreViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: (collectionView.frame.width) / 4 + 4 * cellConstaintSize.spaceCollectionCell , height: collectionView.frame.height / 3)
+        return CGSize(width: (collectionView.frame.width) / 4 + 4 * cellConstaintSize.spaceCollectionCell , height: collectionView.frame.height / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -11,6 +11,7 @@ import Reusable
 
 protocol GenreTableViewDelegate: class {
     func loadmoreAction(movies: [Movie])
+    func pushMovieDetail(movie: Movie)
 }
 
 class GenreTableViewCell: UITableViewCell, NibReusable {
@@ -66,6 +67,14 @@ extension GenreTableViewCell: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return cellConstaintSize.spaceCollectionCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MovieCollectionViewCell,
+        let movie = cell.movie else {
+            return
+        }
+        delegate?.pushMovieDetail(movie: movie)
     }
 }

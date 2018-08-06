@@ -2,13 +2,13 @@ import Foundation
 import ObjectMapper
 
 class Movie: BaseModel {
-    var id: Int?
-    var title: String?
-    var posterPath: String?
-    var vote: Int?
-    var overview: String?
-    var releaseDate: String?
-    var popularity: Int?
+    var id = 0
+    var title = ""
+    var posterPath = ""
+    var vote: Double = 0.00
+    var overview = ""
+    var releaseDate = ""
+    var popularity = 0
     
     required init?(map: Map) {
         mapping(map: map)

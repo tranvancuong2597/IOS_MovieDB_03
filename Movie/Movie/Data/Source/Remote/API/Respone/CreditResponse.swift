@@ -1,17 +1,18 @@
 //
-//  MoviesListResponse.swift
+//  CreditResponse.swift
 //  Movie
 //
-//  Created by Da on 7/31/18.
+//  Created by Da on 8/3/18.
 //  Copyright © 2018 Tran Cuong. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class MoviesListResponse: Mappable {
+class CreditResponse: Mappable {
     var id = 0
-    var movies = [Movie]()
+    var casts = [Credit]()
+    var crews = [Credit]()
     
     required init(map: Map) {
         mapping(map: map)
@@ -19,6 +20,7 @@ class MoviesListResponse: Mappable {
     
     func mapping(map: Map) {
         id <- map["id"]
-        movies <- map["results"]
+        casts <- map["cast"]
+        crews <- map["crew"]
     }
 }

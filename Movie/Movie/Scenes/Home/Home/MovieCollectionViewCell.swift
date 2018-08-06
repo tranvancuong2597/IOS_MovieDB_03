@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import Reusable
 import Cosmos
+import os_object
 
 class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
     
@@ -19,14 +20,18 @@ class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet private weak var titleLabel: UILabel!
     
     // MARK: VARIABLES
+    var movie: Movie?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     func updateCell(movie: Movie?) {
+        self.movie = movie
         self.titleLabel.text = movie?.title
-        guard let poster = movie?.posterPath else { return }
+        guard let poster = movie?.posterPath, let vote = movie?.vote else { return }
         let url = URL(string: URLs.posterImage + poster)
-        self.posterImageView.sd_setImage(with: url, completed: nil)
+        posterImageView.sd_setImage(with: url, completed: nil)
+        cosmosView.rating = vote / 2
     }
 }

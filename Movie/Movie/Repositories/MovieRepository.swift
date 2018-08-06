@@ -5,8 +5,6 @@
 //  Created by Da on 7/31/18.
 //  Copyright © 2018 Tran Cuong. All rights reserved.
 //
-
-
 import Foundation
 import ObjectMapper
 
@@ -25,7 +23,13 @@ protocol MovieRepository {
     
     func getUpcomingMoviesList(completion: @escaping completionUpcomingMovies)
     
+    func getKeyTrailer(id: Int, completion: @escaping completionIdTrailler)
+    
+    func getCredit(id: Int, completion: @escaping completionCredit)
 }
+
+typealias completionIdTrailler = (BaseResult<KeyTrailerResponse>) -> Void
+typealias completionCredit = (BaseResult<CreditResponse>) -> Void
 
 class MovieRepositoryImpl: MovieRepository {
     
@@ -36,10 +40,8 @@ class MovieRepositoryImpl: MovieRepository {
     
     static let sharedInstance: MovieRepository = MovieRepositoryImpl(api: APIService.share)
     
-
-    
     func getMoviesList(id: Int, completion: @escaping completionMovies) {
-        let input = GetMoviesListRequest(id: id)
+        let input = GetMoviesRequest(id: id)
         api?.request(input: input) { (object: MoviesListResponse?, error) in
             if let object = object {
                 completion(.success(object))
@@ -48,6 +50,38 @@ class MovieRepositoryImpl: MovieRepository {
             } else {
                 completion(.failure(error: nil))
             }
+        }
+    }
+    
+    func getKeyTrailer(id: Int, completion: @escaping completionIdTrailler) {
+        let input = KeyTrailerRequest(id: id)
+        guard let api = api else {
+            return
+        }
+        api.request(input: input) { (object: KeyTrailerResponse?, error) in
+            guard let object = object else {
+                guard let error = error else {
+                    return completion(.failure(error: nil))
+                }
+                return completion(.failure(error: error))
+            }
+            completion(.success(object))
+        }
+    }
+    
+    func getCredit(id: Int, completion: @escaping completionCredit) {
+        let input = CreditRequest(id: id)
+        guard let api = api else {
+            return
+        }
+        api.request(input: input) { (object: CreditResponse?, error) in
+            guard let object = object else {
+                guard let error = error else {
+                    return completion(.failure(error: nil))
+                }
+                return completion(.failure(error: error))
+            }
+            completion(.success(object))
         }
     }
     
