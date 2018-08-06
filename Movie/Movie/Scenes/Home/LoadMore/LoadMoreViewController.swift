@@ -10,12 +10,14 @@
 import UIKit
 import Reusable
 
-class LoadMoreViewController: UIViewController {
-    
+final class LoadMoreViewController: UIViewController, StoryboardSceneBased {
+    @IBOutlet private weak var titleView: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var backButton: UIButton!
     
     var movies = [Movie]()
+    static let sceneStoryboard = UIStoryboard(name: Storyboard.home, bundle: nil)
+    
     private struct Constant {
         static let spaceItem = CGFloat(0)
         static let spaceLine = CGFloat(0)
@@ -26,14 +28,10 @@ class LoadMoreViewController: UIViewController {
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.collectionView.reloadData()
-    }
-    
-    func setup() {
+    private func setup() {
         collectionView.register(cellType: MovieCollectionViewCell.self)
         backButton.imageView?.contentMode = .scaleAspectFit
+        setupUILine(view: titleView)
     }
     
     func reloadData(movies: [Movie]) {
@@ -42,6 +40,14 @@ class LoadMoreViewController: UIViewController {
     
     @IBAction func backHomeTappedButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func pushMovieDetail(movie: Movie) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: IdentifierScreen.movieDetail) as? MovieDetailViewController else {
+            return
+        }
+        vc.movie = movie
+        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -66,5 +72,12 @@ extension LoadMoreViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constant.spaceLine
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MovieCollectionViewCell,
+            let movie = cell.movie
+            else { return }
+        pushMovieDetail(movie: movie)
     }
 }

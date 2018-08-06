@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class MoviesListResponse: Mappable {
+class MoviesResponse: Mappable {
     var id = 0
     var movies = [Movie]()
     

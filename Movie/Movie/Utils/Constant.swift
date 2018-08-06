@@ -31,9 +31,11 @@ struct cellConstaintSize {
     static let heightTableCell = CGFloat(30)
     static let spaceItem = CGFloat(0)
     static let spaceLine = CGFloat(0)
+    static let minusHeightTable = CGFloat(24)
 }
 
 struct IdentifierScreen {
     static let loadMore = "LoadMoreViewController"
     static let movieDetail = "MovieDetailViewController"
+    static let credit = "CreditDetailViewController"
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,18 +21,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKD-F0-lg1">
-                        <rect key="frame" x="10" y="10" width="216" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="216" id="9fw-ms-5Qm"/>
-                            <constraint firstAttribute="height" constant="22" id="A1t-f2-Put"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                        <rect key="frame" x="8" y="12" width="216" height="24"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bNc-nz-Wq6">
-                        <rect key="frame" x="16" y="40" width="288" height="270.5"/>
-                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="8" y="46" width="304" height="266.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xmP-7Y-WKv">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -40,28 +37,32 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0r7-Z0-JpE">
-                        <rect key="frame" x="240" y="10" width="70" height="22"/>
+                        <rect key="frame" x="232" y="16" width="80" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="22" id="YnT-oz-khp"/>
-                            <constraint firstAttribute="width" constant="70" id="ZTg-hh-hU4"/>
+                            <constraint firstAttribute="width" constant="80" id="XF4-w6-8qq"/>
+                            <constraint firstAttribute="height" constant="30" id="YnT-oz-khp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
                         <state key="normal" title="Load more">
                             <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="loadmoreActionButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Jou-sV-qh6"/>
+                        </connections>
                     </button>
                 </subviews>
-                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="DKD-F0-lg1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="25W-wN-JWf"/>
-                    <constraint firstItem="bNc-nz-Wq6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="3oD-1W-iUP"/>
-                    <constraint firstAttribute="trailing" secondItem="0r7-Z0-JpE" secondAttribute="trailing" constant="10" id="D0p-ZR-Ftm"/>
-                    <constraint firstAttribute="trailing" secondItem="bNc-nz-Wq6" secondAttribute="trailing" constant="16" id="cM7-u9-JMa"/>
-                    <constraint firstAttribute="bottom" secondItem="bNc-nz-Wq6" secondAttribute="bottom" constant="10" id="hmF-na-LVA"/>
-                    <constraint firstItem="DKD-F0-lg1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="lRk-bU-c6H"/>
-                    <constraint firstItem="bNc-nz-Wq6" firstAttribute="top" secondItem="DKD-F0-lg1" secondAttribute="bottom" constant="8" id="mHr-Sk-qjM"/>
-                    <constraint firstItem="0r7-Z0-JpE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="z31-pz-1Zg"/>
+                    <constraint firstItem="DKD-F0-lg1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="25W-wN-JWf"/>
+                    <constraint firstItem="0r7-Z0-JpE" firstAttribute="leading" secondItem="DKD-F0-lg1" secondAttribute="trailing" constant="8" id="9za-xe-ZRB"/>
+                    <constraint firstItem="bNc-nz-Wq6" firstAttribute="top" secondItem="0r7-Z0-JpE" secondAttribute="bottom" id="Jis-QS-juZ"/>
+                    <constraint firstItem="bNc-nz-Wq6" firstAttribute="trailing" secondItem="0r7-Z0-JpE" secondAttribute="trailing" id="USt-nZ-Wge"/>
+                    <constraint firstItem="bNc-nz-Wq6" firstAttribute="leading" secondItem="DKD-F0-lg1" secondAttribute="leading" id="WKc-yH-dw0"/>
+                    <constraint firstAttribute="bottom" secondItem="bNc-nz-Wq6" secondAttribute="bottom" constant="8" id="hmF-na-LVA"/>
+                    <constraint firstItem="DKD-F0-lg1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="lRk-bU-c6H"/>
+                    <constraint firstItem="0r7-Z0-JpE" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="v12-Du-aRn"/>
+                    <constraint firstItem="0r7-Z0-JpE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="z31-pz-1Zg"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

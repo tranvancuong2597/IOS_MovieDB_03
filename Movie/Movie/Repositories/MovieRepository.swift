@@ -9,11 +9,13 @@ import Foundation
 import ObjectMapper
 
 
-typealias completionMovies = (BaseResult<MoviesListResponse>) -> Void
+typealias completionMovies = (BaseResult<MoviesResponse>) -> Void
 typealias completionTopMovies = (BaseResult<MoviesTopListResponse>) -> Void
 typealias completionPopularMovies = (BaseResult<MoviesPopularListResponse>) -> Void
 typealias completionUpcomingMovies = (BaseResult<MoviesUpcomingListResponse>) -> Void
 typealias completionSearchMovies = (BaseResult<SearchMoviesResponse>) -> Void
+typealias completionIdTrailler = (BaseResult<KeyTrailerResponse>) -> Void
+typealias completionCredit = (BaseResult<CreditResponse>) -> Void
 
 protocol MovieRepository {
     func getMoviesList(id: Int, completion: @escaping completionMovies)
@@ -31,12 +33,9 @@ protocol MovieRepository {
     func getSearchMoviesList(query: String, page: Int,completion: @escaping completionSearchMovies)
 }
 
-typealias completionIdTrailler = (BaseResult<KeyTrailerResponse>) -> Void
-typealias completionCredit = (BaseResult<CreditResponse>) -> Void
-
 class MovieRepositoryImpl: MovieRepository {
     
-    private var api: APIService?
+    private let api: APIService?
     required init(api: APIService) {
         self.api = api
     }
@@ -45,7 +44,7 @@ class MovieRepositoryImpl: MovieRepository {
     
     func getMoviesList(id: Int, completion: @escaping completionMovies) {
         let input = GetMoviesRequest(id: id)
-        api?.request(input: input) { (object: MoviesListResponse?, error) in
+        api?.request(input: input) { (object: MoviesResponse?, error) in
             if let object = object {
                 completion(.success(object))
             } else if let error = error {

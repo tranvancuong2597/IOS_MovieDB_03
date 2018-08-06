@@ -17,11 +17,14 @@ class TopFilmCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet private weak var starView: CosmosView!
     @IBOutlet private weak var titleLabel: UILabel!
     
+    var movie: Movie?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     func updateCell(movie: Movie?) {
+        self.movie = movie
         self.titleLabel.text = movie?.title
         guard let poster = movie?.posterPath else { return }
         let url = URL(string: URLs.posterImage + poster)

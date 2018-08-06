@@ -10,15 +10,17 @@ import UIKit
 import Reusable
 
 class TopFilmViewController: UIViewController {
-    
+    @IBOutlet private weak var titleView: UIView!
     @IBOutlet private weak var topFilmTableView: UITableView!
-    @IBOutlet private weak var nameScreen: UILabel!
-    let minusHeightTable = CGFloat(40)
+    
     var arrFilm = [[Movie]]()
     var topRateFilm = [Movie]()
     var popularFilm = [Movie]()
     var upcommingFilm = [Movie]()
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: APIService.share)
+    private struct Constaint {
+        static let loadingStr = "Loading ..."
+    }
     
     enum TypeFilm: Int {
         case topRate
@@ -56,22 +58,15 @@ class TopFilmViewController: UIViewController {
         topFilmTableView.register(cellType: TopFilmTableViewCell.self)
     }
     
-    func setupUI() {
-        let lineView = UIView()
-        lineView.backgroundColor = ColorConstant.lineColor
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(lineView)
-        
-        lineView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        lineView.topAnchor.constraint(equalTo: nameScreen.bottomAnchor).isActive = true
-        lineView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    private func setupUI() {
+        setupUILine(view: titleView)
     }
-    
-    func loadData() {
+    private func loadData() {
+        showHud(Constaint.loadingStr)
         loadDataTopRate()
         loadDataPopular()
         loadDataUpcoming()
+        hideHUD()
     }
     
     func loadDataTopRate() {
@@ -128,13 +123,12 @@ class TopFilmViewController: UIViewController {
 }
 
 extension TopFilmViewController: UITableViewDelegate, UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return TypeFilm.all.rawValue
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height / 2 - self.minusHeightTable
+        return tableView.bounds.height / 2 - cellConstaintSize.minusHeightTable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,6 +139,21 @@ extension TopFilmViewController: UITableViewDelegate, UITableViewDataSource {
         if arrFilm.count >= 3 {
             cell.updateCell(movies: arrFilm[indexPath.row], namelbl: type.getMessage)
         }
+        cell.delegate = self
         return cell
+    }
+}
+
+extension TopFilmViewController: tableViewDelegate {
+    func pushMovieDetail(movie: Movie) {
+        let vc = MovieDetailViewController.instantiate()
+        vc.movie = movie
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func loadmoreAction(movies: [Movie]) {
+        let vc = LoadMoreViewController.instantiate()
+        vc.reloadData(movies: movies)
+        present(vc, animated: true, completion: nil)
     }
 }

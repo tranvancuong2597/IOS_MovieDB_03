@@ -83,6 +83,11 @@ class SearchViewController: UIViewController, NibReusable {
         }
     }
     
+    func pushMovieDetail(movie: Movie) {
+        let vc = MovieDetailViewController.instantiate()
+        vc.movie = movie
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -109,6 +114,14 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TopFilmCollectionViewCell,
+            let movie = cell.movie else {
+                return
+        }
+        pushMovieDetail(movie: movie)
     }
 }
 

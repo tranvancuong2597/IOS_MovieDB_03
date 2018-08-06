@@ -10,6 +10,8 @@ class Movie: BaseModel {
     var releaseDate = ""
     var popularity = 0
     
+    // MARK: CREDIT
+    var character = ""
     required init?(map: Map) {
         mapping(map: map)
     }
@@ -22,5 +24,6 @@ class Movie: BaseModel {
         overview <- map["overview"]
         releaseDate <- map["release_date"]
         popularity <- map["popularity"]
+        character <- map["character"]
     }
 }

@@ -11,20 +11,35 @@ import UIKit
 class HomeViewController: UIViewController {
     // MARK: OUTLET
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var titleScreenLabel: UILabel!
+    @IBOutlet private weak var titleView: UIView!
+    
     // MARK: VARIABLES
     var genres: [Genre]?
     var moviesDic = [String : [Movie]]()
     private let homeRepository: HomeRepository = HomeRepositoryImpl(api: APIService.share)
     
+    private struct Constaint {
+        static let spaceCollectionCell = CGFloat(8)
+        static let heightTableCell = CGFloat(24)
+        static let spaceItem = CGFloat(0)
+        static let spaceLine = CGFloat(0)
+        static let ratio: CGFloat = 1 / 2
+        static let loadingStr = "Loading ..."
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showHud("Loading")
+        setupUILine(view: titleView)
         tableView.register(cellType: GenreTableViewCell.self)
         loadData()
     }
-    
+
     func loadData() {
-        homeRepository.getGenres { (resultGenres) in
+        showHud(Constaint.loadingStr)
+        homeRepository.getGenres { [weak self] (resultGenres) in
+            guard let `self` = self else { return }
+            self.hideHUD()
             switch resultGenres {
             case .success(let genreRespone):
                 guard let result = genreRespone?.genres else { return }
@@ -45,7 +60,6 @@ class HomeViewController: UIViewController {
             case .failure( _):
                 print("ERROR GENRES")
             }
-            self.hideHUD()  
         }
     }
 }
@@ -59,7 +73,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height / 2 - cellConstaintSize.heightTableCell
+        return tableView.bounds.height * Constaint.ratio - Constaint.heightTableCell
     }
 }
 
@@ -78,23 +92,16 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
-extension HomeViewController: GenreTableViewDelegate {
+extension HomeViewController: tableViewDelegate {
     func pushMovieDetail(movie: Movie) {
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: IdentifierScreen.movieDetail) as? MovieDetailViewController else {
-            return
-        }
+        let vc = MovieDetailViewController.instantiate()
         vc.movie = movie
         self.present(vc, animated: true, completion: nil)
     }
     
     func loadmoreAction(movies: [Movie]) {
-        let storyboad = UIStoryboard(name: Storyboard.home, bundle: nil)
-        guard let vc = storyboad.instantiateViewController(withIdentifier: IdentifierScreen.loadMore) as? LoadMoreViewController else {
-            return
-        }
-        vc.showHud("Loading")
+        let vc = LoadMoreViewController.instantiate()
         vc.reloadData(movies: movies)
-        vc.hideHUD()
         self.present(vc, animated: true, completion: nil)
     }
 }
