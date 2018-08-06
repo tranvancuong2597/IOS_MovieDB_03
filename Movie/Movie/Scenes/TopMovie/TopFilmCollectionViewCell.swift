@@ -23,8 +23,9 @@ class TopFilmCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func updateCell(movie: Movie?) {
         self.titleLabel.text = movie?.title
-        guard let poster = movie?.posterPath else { return }
+        guard let poster = movie?.posterPath, let vote = movie?.vote else { return }
         let url = URL(string: URLs.posterImage + poster)
         self.posterImageView.sd_setImage(with: url, completed: nil)
+        starView.rating = Double(vote)
     }
 }

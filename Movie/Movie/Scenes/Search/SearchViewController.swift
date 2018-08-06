@@ -50,19 +50,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, NibReusable {
             collectionView.reloadData()
             return
         }
-        print(text)
         movies.removeAll()
         loadData(query: text)
     }
 
-    func loadData(query: String) {
+    private func loadData(query: String) {
         self.movieRepository.getSearchMoviesList(query: query, page: 1) { resultList in
             switch resultList {
             case .success(let moviesSearchListResponse):
                 print("aaaa")
                 self.setData(moviesSearchByQueryResponse: moviesSearchListResponse)
             case .failure(let error):
-                print(error?.errorMessage)
+                print(error?.errorMessage ?? "")
             }
         }
     }
@@ -78,7 +77,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, NibReusable {
         self.movies = searchMoviesData
         for item in searchMoviesData {
             self.searchList.append(item.title ?? "")
-            print(searchList)
         }
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -88,7 +86,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, NibReusable {
 
 }
 
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -104,11 +102,13 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width) / 4 - 32 , height: collectionView.frame.height/2)
+        return CGSize(width: (collectionView.frame.width) / 4 + 4 * 8, height: collectionView.frame.height / 3)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return 0
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }

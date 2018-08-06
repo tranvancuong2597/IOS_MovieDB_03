@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="TopFilmCollectionViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="yLW-wO-rxE">
-                        <rect key="frame" x="12" y="4" width="202" height="270"/>
+                        <rect key="frame" x="12" y="4" width="202" height="272"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aaaaaaa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Px5-rC-W5c">
-                        <rect key="frame" x="8" y="306" width="210" height="16"/>
+                        <rect key="frame" x="8" y="308" width="210" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="2dC-2r-ef3"/>
                         </constraints>
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Doc-zd-08u" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="12" y="280" width="202" height="20"/>
+                        <rect key="frame" x="12" y="282" width="202" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="6oM-3L-bF0"/>
                         </constraints>
@@ -67,7 +67,7 @@
                 <constraint firstItem="Px5-rC-W5c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Lp3-Wy-SAT"/>
                 <constraint firstItem="yLW-wO-rxE" firstAttribute="trailing" secondItem="Px5-rC-W5c" secondAttribute="trailing" constant="-4" id="PWh-BX-2n3"/>
                 <constraint firstItem="yLW-wO-rxE" firstAttribute="leading" secondItem="Px5-rC-W5c" secondAttribute="leading" constant="4" id="TH3-cy-TWm"/>
-                <constraint firstAttribute="bottom" secondItem="Px5-rC-W5c" secondAttribute="bottom" constant="8" id="jGN-cy-QqW"/>
+                <constraint firstAttribute="bottom" secondItem="Px5-rC-W5c" secondAttribute="bottom" constant="6" id="jGN-cy-QqW"/>
                 <constraint firstItem="Px5-rC-W5c" firstAttribute="top" secondItem="Doc-zd-08u" secondAttribute="bottom" constant="6" id="pL7-sw-YdZ"/>
                 <constraint firstAttribute="trailing" secondItem="Px5-rC-W5c" secondAttribute="trailing" constant="8" id="qzV-Xd-Kea"/>
                 <constraint firstItem="Doc-zd-08u" firstAttribute="top" secondItem="yLW-wO-rxE" secondAttribute="bottom" constant="6" id="yc7-3d-WbU"/>
