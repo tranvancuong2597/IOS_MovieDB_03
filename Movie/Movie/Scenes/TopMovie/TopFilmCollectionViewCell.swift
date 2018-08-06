@@ -26,6 +26,6 @@ class TopFilmCollectionViewCell: UICollectionViewCell, NibReusable {
         guard let poster = movie?.posterPath, let vote = movie?.vote else { return }
         let url = URL(string: URLs.posterImage + poster)
         self.posterImageView.sd_setImage(with: url, completed: nil)
-        starView.rating = Double(vote)
+        starView.rating = Double(vote/2)
     }
 }
