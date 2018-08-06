@@ -1,8 +1,8 @@
 //
-//  MovieCollectionViewCell.swift
+//  TopFilmCollectionViewCell.swift
 //  Movie
 //
-//  Created by Da on 7/31/18.
+//  Created by TranCuong on 8/1/18.
 //  Copyright © 2018 Tran Cuong. All rights reserved.
 //
 
@@ -11,14 +11,12 @@ import SDWebImage
 import Reusable
 import Cosmos
 
-class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
+class TopFilmCollectionViewCell: UICollectionViewCell, NibReusable {
     
-    // MARK: OUTLET
     @IBOutlet private weak var posterImageView: UIImageView!
-    @IBOutlet private weak var cosmosView: CosmosView!
+    @IBOutlet private weak var starView: CosmosView!
     @IBOutlet private weak var titleLabel: UILabel!
     
-    // MARK: VARIABLES
     override func awakeFromNib() {
         super.awakeFromNib()
     }
