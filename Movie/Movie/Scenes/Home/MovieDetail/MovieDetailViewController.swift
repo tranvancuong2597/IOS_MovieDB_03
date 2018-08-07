@@ -51,6 +51,10 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         setup()
         loadData()
+        if HandlingMoviesDatabase.checkData(movie: movie!) == nil {
+            HandlingMoviesDatabase.insertMovie(movie: movie!)
+            print("Insert Success")
+        }
     }
     
     private func setup() {

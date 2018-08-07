@@ -37,3 +37,7 @@ struct IdentifierScreen {
     static let loadMore = "LoadMoreViewController"
     static let movieDetail = "MovieDetailViewController"
 }
+
+struct nameDatabase {
+    static let movieDatabase = "FavoriteMovies"
+}
