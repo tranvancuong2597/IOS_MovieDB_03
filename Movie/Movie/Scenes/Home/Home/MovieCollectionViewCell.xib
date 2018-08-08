@@ -19,11 +19,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="240" height="286"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yha-ta-FOl">
-                        <rect key="frame" x="12" y="4" width="216" height="226"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notFound" translatesAutoresizingMaskIntoConstraints="NO" id="yha-ta-FOl">
+                        <rect key="frame" x="12" y="4" width="216" height="214"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zY6-c5-TxF" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="8" y="236" width="220" height="20"/>
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zY6-c5-TxF" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="12" y="224" width="216" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Kg0-cW-KnD"/>
@@ -47,9 +47,9 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlk-rL-2jf">
-                        <rect key="frame" x="8" y="262" width="224" height="16"/>
+                        <rect key="frame" x="8" y="250" width="224" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="Clv-jA-95R"/>
+                            <constraint firstAttribute="height" constant="20" id="1ij-Pw-oBv"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,18 +57,18 @@
                     </label>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Qlk-rL-2jf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="B4j-eg-jKy"/>
                 <constraint firstAttribute="trailing" secondItem="Qlk-rL-2jf" secondAttribute="trailing" constant="8" id="D6Z-52-cyD"/>
                 <constraint firstItem="yha-ta-FOl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="EtA-wK-rQb"/>
                 <constraint firstItem="Qlk-rL-2jf" firstAttribute="top" secondItem="zY6-c5-TxF" secondAttribute="bottom" constant="6" id="Gge-1x-XAP"/>
-                <constraint firstItem="zY6-c5-TxF" firstAttribute="leading" secondItem="yha-ta-FOl" secondAttribute="leading" constant="-4" id="R2b-qC-VQS"/>
+                <constraint firstItem="zY6-c5-TxF" firstAttribute="leading" secondItem="yha-ta-FOl" secondAttribute="leading" id="R2b-qC-VQS"/>
                 <constraint firstItem="zY6-c5-TxF" firstAttribute="top" secondItem="yha-ta-FOl" secondAttribute="bottom" constant="6" id="XgY-jL-rGl"/>
                 <constraint firstItem="zY6-c5-TxF" firstAttribute="trailing" secondItem="yha-ta-FOl" secondAttribute="trailing" id="ac6-N8-TSe"/>
                 <constraint firstItem="yha-ta-FOl" firstAttribute="trailing" secondItem="Qlk-rL-2jf" secondAttribute="trailing" constant="-4" id="iEo-zG-zCo"/>
                 <constraint firstItem="yha-ta-FOl" firstAttribute="leading" secondItem="Qlk-rL-2jf" secondAttribute="leading" constant="4" id="sSY-z7-UT0"/>
-                <constraint firstAttribute="bottom" secondItem="Qlk-rL-2jf" secondAttribute="bottom" constant="8" id="uhQ-hy-KuR"/>
+                <constraint firstAttribute="bottom" secondItem="Qlk-rL-2jf" secondAttribute="bottom" constant="16" id="uhQ-hy-KuR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="240" height="286"/>
@@ -80,4 +80,7 @@
             <point key="canvasLocation" x="142" y="-128"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="notFound" width="400" height="400"/>
+    </resources>
 </document>

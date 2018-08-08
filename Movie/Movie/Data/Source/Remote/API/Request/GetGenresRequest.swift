@@ -12,7 +12,7 @@ import Alamofire
 
 class GetGenresRequest: BaseRequest {
     required init() {
-        let body: [String: Any]  = [
+        let body: [String: Any] = [
             "api_key": APIKey.key,
             "language": "en-US"
         ]

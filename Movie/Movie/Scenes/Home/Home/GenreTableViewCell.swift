@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-protocol GenreTableViewDelegate: class {
+protocol tableViewDelegate: class {
     func loadmoreAction(movies: [Movie])
     func pushMovieDetail(movie: Movie)
 }
@@ -23,7 +23,7 @@ class GenreTableViewCell: UITableViewCell, NibReusable {
     
     // MARK: VARIABLES
     var movies = [Movie]()
-    weak var delegate: GenreTableViewDelegate?
+    weak var delegate: tableViewDelegate?
     private let moviesListRepository: MovieRepository = MovieRepositoryImpl(api: APIService.share)
     
     func updateCell(name: String, movies: [Movie]?) {
@@ -45,9 +45,9 @@ class GenreTableViewCell: UITableViewCell, NibReusable {
     }
     
     func setup() {
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
-        self.collectionView.register(cellType: MovieCollectionViewCell.self)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(cellType: MovieCollectionViewCell.self)
     }
 }
 
@@ -63,7 +63,7 @@ extension GenreTableViewCell: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width) / 4 + 5 * cellConstaintSize.spaceCollectionCell , height: collectionView.frame.height)
+        return CGSize(width: (collectionView.frame.width) / 4 + 6 * cellConstaintSize.spaceCollectionCell , height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

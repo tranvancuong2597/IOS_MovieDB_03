@@ -26,4 +26,16 @@ extension UIViewController {
     func hideHUD() {
         MBProgressHUD.hide(for: self.view, animated: true)
     }
+    
+    func setupUILine(view: UIView) {
+        let lineView = UIView()
+        lineView.backgroundColor = ColorConstant.lineColor
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(lineView)
+        
+        lineView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        lineView.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        lineView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
 }

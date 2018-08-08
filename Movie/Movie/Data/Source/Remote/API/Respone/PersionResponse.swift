@@ -1,19 +1,16 @@
 //
-//  Credit.swift
+//  PersionResponse.swift
 //  Movie
 //
-//  Created by Da on 8/3/18.
+//  Created by Da on 8/6/18.
 //  Copyright © 2018 Tran Cuong. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class Credit: BaseModel {
-    var id = 0
-    var name =  ""
-    var profilePath = ""
-    var gender = 0
+class PersionResponse: Mappable {
+    var birthday = ""
     var knownForDepartment = ""
     var biography = ""
     var placeOfBirth = ""
@@ -23,12 +20,9 @@ class Credit: BaseModel {
     }
     
     func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        profilePath <- map["profile_path"]
-        gender <- map["gender"]
-        placeOfBirth <- map["placeOfBirth"]
+        birthday <- map["birthday"]
         knownForDepartment <- map["known_for_department"]
         biography <- map["biography"]
+        placeOfBirth <- map["place_of_birth"]
     }
 }

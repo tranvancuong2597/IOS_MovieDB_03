@@ -18,7 +18,7 @@ typealias completionGenres = (BaseResult<GenreResponse>) -> Void
 //typealias completionMovies = (BaseResult<MoviesListResponse>) -> Void
 
 class HomeRepositoryImpl: HomeRepository {
-    private var api: APIService?
+    private let api: APIService?
     
     required init(api: APIService) {
         self.api = api
@@ -48,7 +48,7 @@ class HomeRepositoryImpl: HomeRepository {
             return
         }
         let input = GetMoviesRequest(id: id)
-        api.request(input: input) { (object: MoviesListResponse?, error) in
+        api.request(input: input) { (object: MoviesResponse?, error) in
             guard let object = object else {
                 guard let error = error else {
                     return completion(.failure(error: nil))

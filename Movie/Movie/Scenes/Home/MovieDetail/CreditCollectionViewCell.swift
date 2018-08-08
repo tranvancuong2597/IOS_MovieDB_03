@@ -27,6 +27,7 @@ class CreditCollectionViewCell: UICollectionViewCell, NibReusable {
             let name = credit?.name else {
                 return
         }
+        self.credit = credit
         profilePathImageView.sd_setImage(with: url, completed: nil)
         nameLabel.text = name
     }

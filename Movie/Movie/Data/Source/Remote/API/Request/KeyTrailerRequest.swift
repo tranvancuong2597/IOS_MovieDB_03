@@ -11,7 +11,7 @@ import Alamofire
 
 class KeyTrailerRequest: BaseRequest {
     required init(id: Int) {
-        let body: [String: Any]  = [
+        let body: [String: Any] = [
             "api_key": APIKey.key,
             "language": "en-US"
         ]

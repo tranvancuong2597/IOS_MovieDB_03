@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="175" height="248"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Hz-xg-J7s">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notFound" translatesAutoresizingMaskIntoConstraints="NO" id="9Hz-xg-J7s">
                         <rect key="frame" x="10" y="8" width="155" height="212"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvI-Ez-U8a">
@@ -52,4 +52,7 @@
             <point key="canvasLocation" x="96.5" y="172"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="notFound" width="400" height="400"/>
+    </resources>
 </document>

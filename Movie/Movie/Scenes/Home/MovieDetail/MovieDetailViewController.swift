@@ -4,18 +4,26 @@ import Reusable
 import Cosmos
 import youtube_ios_player_helper
 
-private struct Constant {
-    static let spaceItem = CGFloat(0)
-    static let spaceLine = CGFloat(0)
-}
-
-private enum tagCollectionView: Int {
-    case actor = 1
-    case crew = 2
-}
-
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController, StoryboardSceneBased {
+    private struct Constant {
+        static let spaceItem = CGFloat(0)
+        static let spaceLine = CGFloat(0)
+        static let ratio: CGFloat = 1 / 2
+        static let actorStr = "ACTOR"
+        static let crewStr = "CREW"
+        static let heightMore: CGFloat = 24
+        static let loading = "Loading..."
+        static let sectionTable = 2
+        static let rowTable = 1
+    }
+    
+    private enum tagCollectionView: Int {
+        case actor = 1
+        case crew = 2
+    }
+    
     // MARK: OUTLET
+    @IBOutlet private weak var titleView: UIView!
     @IBOutlet private weak var infoView: UIView!
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var titleMovie: UILabel!
@@ -25,19 +33,15 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet private weak var popularLabel: UILabel!
     
     // MARK: reviewTrailerView
-    @IBOutlet weak var heightConstraintView: NSLayoutConstraint!
+    @IBOutlet private weak var heightConstraintView: NSLayoutConstraint!
+    @IBOutlet private weak var heightReviewView: NSLayoutConstraint!
     @IBOutlet private weak var reviewTrailerView: UIView!
     @IBOutlet private weak var reviewLabel: UILabel!
     @IBOutlet private weak var youtubePlayer: YTPlayerView!
-    @IBOutlet weak var seeMoreButton: UIButton!
-    
-    // MARK: ActorView
-    @IBOutlet private weak var actorView: UIView!
-    @IBOutlet private weak var actorCollectionView: UICollectionView!
+    @IBOutlet private weak var seeMoreButton: UIButton!
     
     // MARK: Credit
-    @IBOutlet private weak var crewView: UIView!
-    @IBOutlet private weak var crewCollectionView: UICollectionView!
+    @IBOutlet private weak var tableView: UITableView!
     
     //MARK: VARIABLES
     var movie: Movie?
@@ -45,6 +49,7 @@ class MovieDetailViewController: UIViewController {
     var crews = [Credit]()
     var keys = [KeyTrailer]()
     private let moviesRepository: MovieRepository = MovieRepositoryImpl(api: APIService.share)
+    static var sceneStoryboard = UIStoryboard(name: Storyboard.home, bundle: nil)
     
     //MARK: FUNCION
     override func viewDidLoad() {
@@ -54,15 +59,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func setup() {
-        actorCollectionView.register(cellType: CreditCollectionViewCell.self)
-        crewCollectionView.register(cellType: CreditCollectionViewCell.self)
-        actorCollectionView.tag = tagCollectionView.actor.rawValue
-        crewCollectionView.tag = tagCollectionView.crew.rawValue
-        borderViews(views: infoView, reviewTrailerView, actorView, crewView)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.showHud("Loading")
+        tableView.register(cellType: CreditTableViewCell.self)
+        setupUILine(view: titleView)
     }
     
     private func loadData() {
@@ -78,15 +76,17 @@ class MovieDetailViewController: UIViewController {
         posterImageView.sd_setImage(with: url, completed: nil)
         cosmosView.rating = vote / 2
         voteLabel.text = "( " + String(vote) + " )"
-        dateLabel.text = "Release date: " + releaseDate
+        dateLabel.text = "Release date: " + releaseDate 
         popularLabel.text = "Popularity: " + String(popular)
         reviewLabel.text = overview
         loadWithApi()
     }
     
     private func loadWithApi() {
+        showHud(Constant.loading)
         guard let id = movie?.id else { return }
-        moviesRepository.getKeyTrailer(id: id) { (resultKeys) in
+        moviesRepository.getKeyTrailer(id: id){ [weak self] (resultKeys) in
+            guard let `self` = self else { return }
             switch resultKeys {
             case .success(let keyRespone):
                 guard let keys = keyRespone?.keyTrailers else { return }
@@ -96,15 +96,18 @@ class MovieDetailViewController: UIViewController {
                 print("ERROR KEY")
             }
         }
-        moviesRepository.getCredit(id: id) { (resultCredits) in
+        moviesRepository.getCredit(id: id) { [weak self] (resultCredits) in
+            guard let `self` = self else { return }
+            self.hideHUD()
             switch resultCredits {
             case .success(let creditRespone):
                 guard let casts = creditRespone?.casts, let crews = creditRespone?.crews
                     else { return }
                 self.actors = casts
                 self.crews = crews
-                self.actorCollectionView.reloadData()
-                self.crewCollectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .failure( _):
                 print("ERROR CREDIT")
             }
@@ -117,10 +120,19 @@ class MovieDetailViewController: UIViewController {
         self.hideHUD()
     }
     
+    private func pushCreditDetail(credit: Credit?) {
+        guard let creditDetailVC = CreditDetailViewController(nibName: IdentifierScreen.credit, bundle: nil) as? CreditDetailViewController else {
+            return
+        }
+        creditDetailVC.credit = credit
+        present(creditDetailVC, animated: true, completion: nil)
+    }
+    
     //MARK: ACTION
     @IBAction private func seeMoreTappedButton(_ sender: Any) {
         guard let height = reviewLabel.text?.height(withConstrainedWidth: reviewLabel.frame.width, font: UIFont.systemFont(ofSize: 17)) else { return }
         heightConstraintView.constant = height
+        heightReviewView.constant = heightReviewView.constant + height
         seeMoreButton.isHidden = true
         youtubePlayer.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor).isActive = true
     }
@@ -130,44 +142,32 @@ class MovieDetailViewController: UIViewController {
     }
 }
 
-extension MovieDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.tag {
-        case tagCollectionView.actor.rawValue:
-            return actors.count
-        case tagCollectionView.crew.rawValue:
-            return crews.count
-        default:
-            return 0
-        }
+extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Constant.sectionTable
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView.tag {
-        case tagCollectionView.actor.rawValue:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CreditCollectionViewCell.self) as CreditCollectionViewCell
-            let item = actors[indexPath.row]
-            cell.updateCell(credit: item)
-            return cell
-        case tagCollectionView.crew.rawValue:
-            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CreditCollectionViewCell.self) as CreditCollectionViewCell
-            let item = crews[indexPath.row]
-            cell.updateCell(credit: item)
-            return cell
-        default:
-            return UICollectionViewCell()
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Constant.rowTable
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width * 0.3 , height: collectionView.bounds.height - 8)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CreditTableViewCell.self) as CreditTableViewCell
+        indexPath.section == 0 ? cell.setContentForCell(data: actors, title: Constant.actorStr) :
+        cell.setContentForCell(data: crews, title: Constant.crewStr)
+        cell.delegate = self
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return Constant.spaceItem
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return infoView.frame.height + Constant.heightMore
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constant.spaceLine
+}
+
+extension MovieDetailViewController: pushCreditTableViewDelegate {
+    func pushCreditDetail(credit: Credit) {
+        let vc = CreditDetailViewController(nibName: IdentifierScreen.credit, bundle: nil)
+        vc.credit = credit
+        present(vc, animated: true, completion: nil)
     }
 }
